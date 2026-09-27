@@ -1,7 +1,8 @@
 # Friends Included / Wedding Guests for Hire
 
-Block A: a minimal Next.js application using TypeScript and the App Router.
-This foundation intentionally contains no business functionality or data.
+Block A provides a minimal Next.js application using TypeScript and the App Router.
+Block B adds the Supabase schema migration and five fictional employee seed rows.
+The application still intentionally contains no business functionality or transaction data.
 
 ## Requirements and scope
 
@@ -10,7 +11,7 @@ This foundation intentionally contains no business functionality or data.
 - `CODEX_BLOCK_A_FOUNDATION.md` defines this block's scope and acceptance criteria.
 - Original Markdown and DOCX source documents are preserved unchanged in `docs/`.
 
-Only the foundation is implemented. The next planned block is **Block B: Supabase schema and database contract**, which requires a separate implementation request.
+The foundation and database schema contract are implemented. See [Block B schema contract](docs/BLOCK_B_SCHEMA_CONTRACT.md) for migration details, constraints and validation limits. The next planned block is **Block C: shared domain/business layer**, which requires a separate implementation request.
 
 ## Local setup
 
@@ -40,7 +41,7 @@ The example contains names with empty values only:
 | `SUPABASE_URL` | Supabase project API URL, read by server code. |
 | `SUPABASE_SERVICE_ROLE_KEY` | Privileged Supabase service-role key, read only by server code. |
 
-The landing page and build work without credentials. The factory in `src/lib/supabase/server.ts` validates the environment only when called; Block A does not call it or connect to a database. No tables, migrations, RLS policies, or business operations are created.
+The landing page and build work without credentials. The factory in `src/lib/supabase/server.ts` validates the environment only when called; the application does not call it or connect to a database yet. Block B's migration is separate from application startup and has not been applied to a database in this workspace. It defines five tables with RLS enabled and no public policies; no business operations are implemented.
 
 The module imports `server-only`, so Next.js rejects importing it into a Client Component. Future browser components must call server endpoints/actions rather than import the privileged client. The client does not persist or refresh user sessions. Never prefix private credentials with `NEXT_PUBLIC_`, return them to the browser, or commit them. Actual `.env*` files are ignored; `.env.example` remains trackable. No Telegram or Google credentials are needed in Block A.
 
