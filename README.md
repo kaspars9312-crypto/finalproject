@@ -2,16 +2,17 @@
 
 Block A provides a minimal Next.js application using TypeScript and the App Router.
 Block B adds the Supabase schema migration and five fictional employee seed rows.
-The application still intentionally contains no business functionality or transaction data.
+Block C adds pure domain calculations, validation, permission decisions and unit tests.
+The website remains the foundation page, without transaction data or business UI.
 
 ## Requirements and scope
 
 - `docs/ORIGINAL_ASSIGNMENT.md` is the authoritative assignment.
 - `docs/PROJECT_SPEC.md` is the frozen implementation architecture; the original assignment wins in a conflict.
-- `CODEX_BLOCK_A_FOUNDATION.md` defines this block's scope and acceptance criteria.
+- `CODEX_BLOCK_A_FOUNDATION.md` defines the original foundation scope and acceptance criteria.
 - Original Markdown and DOCX source documents are preserved unchanged in `docs/`.
 
-The foundation and database schema contract are implemented. See [Block B schema contract](docs/BLOCK_B_SCHEMA_CONTRACT.md) for migration details, constraints and validation limits. The next planned block is **Block C: shared domain/business layer**, which requires a separate implementation request.
+The foundation, database schema contract and pure domain layer are implemented. See [Block B schema contract](docs/BLOCK_B_SCHEMA_CONTRACT.md) for the frozen migration and [Block C domain contract](docs/BLOCK_C_DOMAIN_CONTRACT.md) for calculation boundaries, test oracles and validation results. Block C stops at independent review; persistence operations and Block D are not implemented.
 
 ## Local setup
 
@@ -48,6 +49,7 @@ The module imports `server-only`, so Next.js rejects importing it into a Client 
 ## Developer checks
 
 ```sh
+pnpm test
 pnpm typecheck
 pnpm lint
 pnpm build
@@ -55,6 +57,8 @@ pnpm start
 ```
 
 Typecheck generates Next.js route types before running TypeScript, including on a fresh checkout. Lint runs ESLint separately from the production build. `pnpm start` serves the production build on port 3000. Generated `.next/`, `next-env.d.ts`, and TypeScript build information are ignored.
+
+`pnpm test` runs the domain tests once with Vitest in Node; `pnpm test:watch` watches for changes. Tests need no network or credentials and never call Supabase, Telegram or Google Sheets.
 
 Tooling note: ESLint 9.39.5 is deprecated upstream, but is compatible with all plugins in this Next.js ESLint configuration; ESLint 10 currently produces peer dependency conflicts. `pnpm-workspace.yaml` explicitly permits the native resolver's installation script. Next.js generates `AGENTS.md` and `CLAUDE.md` on the first development run; these guidance files are included in the repository.
 
