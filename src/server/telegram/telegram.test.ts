@@ -9,6 +9,7 @@ import { euroCents, validateAnswer } from "./wizard";
 import { parseUpdate, telegramId, type Session } from "./types";
 
 vi.mock("server-only", () => ({}));
+vi.mock("../sheets/sync", () => ({ syncTransactionToSheets: vi.fn().mockResolvedValue("PENDING") }));
 vi.mock("../../lib/supabase/server", () => ({ createSupabaseAdminClient: vi.fn() }));
 const rpc = vi.fn();
 const http = vi.fn();

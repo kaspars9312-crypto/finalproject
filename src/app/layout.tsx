@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Friends Included / Wedding Guests for Hire",
-  description: "Friends Included — Block A project foundation.",
+  description: "Friends Included — employee submissions and Google Sheets synchronization.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

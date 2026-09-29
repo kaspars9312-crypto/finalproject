@@ -3,6 +3,7 @@ import { sendMessage } from "./client";
 import { applyUpdate, markConfirmation, readSession } from "./persistence";
 import { prompts, validateAnswer } from "./wizard";
 import type { SavedSubmission, TelegramUpdate, UpdateResult } from "./types";
+import { syncTransactionToSheets } from "../sheets/sync";
 
 const help = "Use /sale to submit a sale, /expense to submit an expense, or /cancel to cancel the current entry.";
 const linkRequired = "Your Telegram account is not linked to an active employee yet. A manager must link it on the website. Use /start first if you have not already done so.";
@@ -39,10 +40,17 @@ export async function processUpdate(update: TelegramUpdate): Promise<void> {
   const result = await applyUpdate({ updateId: update.update_id, userId: message.from.id, chatId: message.chat.id,
     command, session, value: answer?.value });
   if (result.outcome === "SAVED") {
-    let sent = false;
-    try { await sendMessage(result.transaction.target_chat_id, confirmationText(result.transaction)); sent = true; }
-    catch { /* The saved financial row survives; persist a fixed, token-free error. */ }
-    await markConfirmation(result.transaction.id, sent);
+    const outcomes = await Promise.allSettled([
+      syncTransactionToSheets(result.transaction.id),
+      (async () => {
+        let sent = false;
+        try { await sendMessage(result.transaction.target_chat_id, confirmationText(result.transaction)); sent = true; }
+        catch { /* The saved financial row survives; persist a fixed, token-free error. */ }
+        await markConfirmation(result.transaction.id, sent);
+      })(),
+    ]);
+    // Preserve Block E's tracking-error response, after both independent attempts.
+    if (outcomes[1].status === "rejected") throw outcomes[1].reason;
   } else {
     const text = reply(result, answer?.error);
     if (text) {
