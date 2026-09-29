@@ -2,6 +2,8 @@ import { listEmployees, readVisibleTransactions, ReadError } from "../server/rec
 import type { Employee, TransactionView } from "../server/records/types";
 import { sheetRow } from "../server/sheets/rows";
 import { retrySheetsAction } from "./actions";
+import { readWorkflow, type WorkflowData } from "../server/website/read";
+import { WebsiteWorkflow } from "./workflow";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -19,12 +21,17 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
   let actor: Employee | undefined;
   let transactions: TransactionView[] = [];
   let error = "";
+  let workflow: WorkflowData | undefined;
   let selected = typeof query.employee === "string" ? query.employee : "";
   try {
     employees = await listEmployees();
     if (query.employee === undefined) selected = employees.find(e => e.code === "RICHARD")?.id ?? "";
     ({ actor, transactions } = await readVisibleTransactions(selected));
   } catch { error = new ReadError().message; }
+  if (actor) {
+    try { workflow = await readWorkflow(actor.id); }
+    catch { /* Keep the working records view available if workflow setup is missing. */ }
+  }
   return (
     <main>
       <header>
@@ -48,6 +55,8 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
       </section>
       {error && <p role="alert" className="notice">{error}</p>}
       {typeof query.sync === "string" && syncMessages[query.sync] && <p role="status" className="notice">{syncMessages[query.sync]}</p>}
+      {workflow ? <WebsiteWorkflow key={workflow.actor.id} data={workflow} employees={employees} /> : actor &&
+        <p role="alert" className="notice">Entry and manager controls are unavailable. Check the workflow database setup and refresh.</p>}
       {actor && <section aria-label="Transactions">
         <h2>Transactions <span className="count">{transactions.length}</span></h2>
         {transactions.length === 0 ? <p className="empty">No submissions are visible for this employee yet.</p> :

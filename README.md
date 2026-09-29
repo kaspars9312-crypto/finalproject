@@ -1,8 +1,9 @@
 # Friends Included / Wedding Guests for Hire
 
-Blocks A–E are frozen at `8058ecf`. Block F adds a server-rendered transaction view,
-Demonstration role selector, Google Sheets synchronization and manager sync retry.
-Block F changes are uncommitted for independent review. No Block G work is included.
+Blocks B–F are frozen; the Block G baseline is `590b3a4` (safe Sheets diagnostics).
+Block G adds website entry, manager correction/approval/allocation, Telegram link
+setup, and decision delivery/retry. These changes are uncommitted for review.
+No Block H financial dashboard is implemented.
 
 ## Requirements and contracts
 
@@ -15,6 +16,7 @@ by Blocks C–E. Original documents and earlier migrations remain unchanged.
 - [Operation contract](docs/BLOCK_D_OPERATIONS_CONTRACT.md)
 - [Telegram contract](docs/BLOCK_E_TELEGRAM_CONTRACT.md)
 - [Block F implementation and review report](docs/BLOCK_F_SHEETS_CONTRACT.md)
+- [Block G implementation, acceptance review and runtime limits](docs/BLOCK_G_WEBSITE_CONTRACT.md)
 
 ## Local development
 
@@ -28,6 +30,10 @@ pnpm dev
 Open http://localhost:3000. Select an employee and press **View records**.
 Richard is the default selection. Salespeople and Kevin see their own submissions;
 Svetlana sees all submissions and can retry pending or failed Sheets syncs.
+With the Block G migration applied, salespeople can submit sales and Kevin can
+submit expenses. Svetlana can inspect original proposals, save supported pending
+sale corrections, approve the proposed or a changed final split, allocate awaiting
+expenses, set Telegram links, and retry pending/failed decision deliveries.
 This is deliberately fictional demonstration access, not authentication: visitors
 can select any of the five identities. A supplied role string never grants access.
 
@@ -45,7 +51,7 @@ configuration when copying the example.
 | --- | --- |
 | `SUPABASE_URL` | Server Supabase API URL. |
 | `SUPABASE_SERVICE_ROLE_KEY` | Server-only privileged database access. |
-| `TELEGRAM_BOT_TOKEN` | Bot prompts and submission confirmations. |
+| `TELEGRAM_BOT_TOKEN` | Bot prompts, submission confirmations and manager decisions. |
 | `TELEGRAM_WEBHOOK_SECRET` | Incoming webhook verification. |
 | `GOOGLE_SERVICE_ACCOUNT_EMAIL` | Google service-account identity. |
 | `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY` | Private key; escaped newlines are accepted. |
@@ -55,7 +61,10 @@ No private variable has a `NEXT_PUBLIC_` prefix. Never commit credentials, servi
 JSON, local env files, review ZIPs, caches or build output. Server-only modules are
 protected by the `server-only` import boundary.
 
-## Deferred live setup after Block F review
+## Historical Block F setup
+
+The supplied Block G baseline reports this milestone live-verified. Retain the
+existing practice sale `QA_TELEGRAM_SALE_001`; Block G does not clean it up.
 
 1. Create/select a spreadsheet with exactly **Sales** and **Expenses** tabs. Keep the
    tabs empty or use the exact headers in `src/server/sheets/rows.ts`.
@@ -77,7 +86,8 @@ Block F automated tests. The live setup above is intentionally not executed here
 
 `POST /api/telegram/webhook` retains the Block E secret check and private-chat wizard.
 Commands are `/start`, `/sale`, `/expense`, `/cancel`. The manager linking backend
-remains `setManagerTelegramLink`; no setup UI is added in Block F.
+remains `setManagerTelegramLink`; Block G exposes it only to the selected active
+stored manager through the website. Users must first send `/start` privately.
 
 After a SAVED receipt, Sheets sync and the initial confirmation run independently,
 and both attempts are awaited. Sync reads the current DB snapshot, upserts by exact
@@ -110,6 +120,27 @@ Unit tests mock DB/RPC and external clients; no real network or credentials are 
 The last check scans built browser assets for private env names and locally configured
 values without printing secrets. SQL QA is separate and must be run after review.
 
-Website entry, manager approvals/allocation/setup UI, full financial dashboard,
-decision notification delivery/retry, persistent Test 1/Test 2 data, authentication,
-workers, cron, and bidirectional Sheets editing remain outside Block F.
+## Block G review-time setup and delivery
+
+After review, apply `supabase/migrations/20260929000000_website_decisions.sql` and
+run `supabase/tests/block_g_website_decisions.sql` in a dedicated connection. The
+SQL QA rolls back every application mutation and checks restoration afterward.
+Neither step has been run remotely by this implementation.
+
+Every website financial mutation uses the frozen Block D operation, then attempts
+the existing Sheets sync after commit. Approval/allocation independently attempts
+a Telegram decision to the submitter. Telegram-origin decisions keep the immutable
+submission chat; website decisions use the submitter's link at decision time.
+Block D freezes that target at commit. Retries never re-resolve it or repeat finance.
+No decision-time link displays exactly **No Telegram recipient linked**. A later
+link does not silently retarget that decision.
+
+Notification status is separate from finance: PENDING, SENT, FAILED, NO_RECIPIENT,
+or NOT_REQUIRED. Pending/failed unclaimed decisions have a manager retry button.
+An interrupted claim remains PENDING and requires operator recovery after the old
+sender has stopped; see the Block G report. External Telegram delivery cannot be
+guaranteed exactly once after an ambiguous network timeout.
+
+Still deferred: migration application, SQL QA execution, deployment and manual
+website/Sheets/Telegram checks; Block H dashboard; official Test 1/Test 2 records;
+test-data cleanup; full authentication; queues/workers; bidirectional Sheets editing.
