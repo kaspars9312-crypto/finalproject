@@ -1,4 +1,7 @@
-import { listEmployees, readVisibleTransactions, ReadError } from "../server/records/read";
+import { listEmployees, ReadError } from "../server/records/read";
+import { readDashboardRecords, type FinancialDashboard } from "../server/dashboard/read";
+import { FinancialDashboardSection } from "./financial-dashboard";
+import { SubmissionInfo } from "./submission-info";
 import type { Employee, TransactionView } from "../server/records/types";
 import { sheetRow } from "../server/sheets/rows";
 import { retrySheetsAction } from "./actions";
@@ -22,11 +25,13 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
   let transactions: TransactionView[] = [];
   let error = "";
   let workflow: WorkflowData | undefined;
+  let dashboard: FinancialDashboard | null = null;
+  let dashboardError: string | null = null;
   let selected = typeof query.employee === "string" ? query.employee : "";
   try {
     employees = await listEmployees();
     if (query.employee === undefined) selected = employees.find(e => e.code === "RICHARD")?.id ?? "";
-    ({ actor, transactions } = await readVisibleTransactions(selected));
+    ({ actor, transactions, dashboard, dashboardError } = await readDashboardRecords(selected));
   } catch { error = new ReadError().message; }
   if (actor) {
     try { workflow = await readWorkflow(actor.id); }
@@ -39,6 +44,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
         <h1>Friends Included</h1>
         <p>All friendships expire at checkout.</p>
       </header>
+      <SubmissionInfo />
       <section className="role-panel" aria-label="Demonstration access">
         <form method="get">
           <label htmlFor="employee">Demonstration role</label>
@@ -55,6 +61,8 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
       </section>
       {error && <p role="alert" className="notice">{error}</p>}
       {typeof query.sync === "string" && syncMessages[query.sync] && <p role="status" className="notice">{syncMessages[query.sync]}</p>}
+      {dashboard && <FinancialDashboardSection data={dashboard} />}
+      {dashboardError && <p role="alert" className="notice">{dashboardError}</p>}
       {workflow ? <WebsiteWorkflow key={workflow.actor.id} data={workflow} employees={employees} /> : actor &&
         <p role="alert" className="notice">Entry and manager controls are unavailable. Check the workflow database setup and refresh.</p>}
       {actor && <section aria-label="Transactions">

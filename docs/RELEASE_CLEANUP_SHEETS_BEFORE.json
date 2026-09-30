@@ -1,0 +1,313 @@
+{
+  "capturedAt": "2026-09-29",
+  "Sales": {
+    "spreadsheetId": "1Q8_NLiBBNTiDLmSAhnhs7ddAKkJU8xiHbRyN-CNdTMk",
+    "spreadsheetUrl": "https://docs.google.com/spreadsheets/d/1Q8_NLiBBNTiDLmSAhnhs7ddAKkJU8xiHbRyN-CNdTMk/edit",
+    "properties": {
+      "title": "Friends Included Finance",
+      "locale": "ru_RU",
+      "timeZone": "Europe/Riga"
+    },
+    "sheets": [
+      {
+        "properties": {
+          "sheetId": 0,
+          "title": "Sales",
+          "index": 0,
+          "sheetType": "GRID",
+          "gridProperties": {
+            "rowCount": 1002,
+            "columnCount": 26
+          }
+        },
+        "data": [
+          {
+            "rowData": [
+              {
+                "values": [
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "Reference"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "Submission time"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "Salesperson"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "Customer"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "Project"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "Description"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "Amount"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "Proposed Richard %"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "Proposed Anastasia %"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "Proposed Jean-Claude %"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "Approved Richard %"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "Approved Anastasia %"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "Approved Jean-Claude %"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "Richard earned commission"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "Anastasia earned commission"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "Jean-Claude earned commission"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "Status"
+                    }
+                  }
+                ]
+              },
+              {
+                "values": [
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "QA_TELEGRAM_SALE_001"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "2026-09-28T20:37:06.022233+00:00"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "Richard Darling"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "Test Customer"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "A"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "Test sale from Telegram"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "€1000.00"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "50"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "30"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "20"
+                    }
+                  },
+                  {},
+                  {},
+                  {},
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "€0.00"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "€0.00"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "€0.00"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "Pending approval"
+                    }
+                  }
+                ]
+              },
+              {
+                "values": [
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "QA_BLOCK_G_SALE_001"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "2026-09-29T14:28:54.750863+00:00"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "Richard Darling"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "Live Test Customer"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "A"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "Block G live test"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "€1000.00"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "50"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "30"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "20"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "20"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "40"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "40"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "€20.00"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "€40.00"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "€40.00"
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "Approved"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "Expenses": {
+    "spreadsheetId": "1Q8_NLiBBNTiDLmSAhnhs7ddAKkJU8xiHbRyN-CNdTMk",
+    "spreadsheetUrl": "https://docs.google.com/spreadsheets/d/1Q8_NLiBBNTiDLmSAhnhs7ddAKkJU8xiHbRyN-CNdTMk/edit",
+    "properties": {
+      "title": "Friends Included Finance",
+      "locale": "ru_RU",
+      "timeZone": "Europe/Riga"
+    },
+    "sheets": [
+      {
+        "properties": {
+          "sheetId": 836529603,
+          "title": "Expenses",
+          "index": 1,
+          "sheetType": "GRID",
+          "gridProperties": {
+            "rowCount": 1000,
+            "columnCount": 26
+          }
+        },
+        "data": [
+          {}
+        ]
+      }
+    ]
+  }
+}

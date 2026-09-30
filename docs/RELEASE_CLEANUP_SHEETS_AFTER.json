@@ -1,0 +1,154 @@
+{
+  "Sales": {
+    "verified": true,
+    "onlyAuthorizedRowsRemoved": true,
+    "after": {
+      "spreadsheetId": "1Q8_NLiBBNTiDLmSAhnhs7ddAKkJU8xiHbRyN-CNdTMk",
+      "spreadsheetUrl": "https://docs.google.com/spreadsheets/d/1Q8_NLiBBNTiDLmSAhnhs7ddAKkJU8xiHbRyN-CNdTMk/edit",
+      "properties": {
+        "title": "Friends Included Finance",
+        "locale": "ru_RU",
+        "timeZone": "Europe/Riga"
+      },
+      "sheets": [
+        {
+          "properties": {
+            "sheetId": 0,
+            "title": "Sales",
+            "index": 0,
+            "sheetType": "GRID",
+            "gridProperties": {
+              "rowCount": 1000,
+              "columnCount": 26
+            }
+          },
+          "data": [
+            {
+              "rowData": [
+                {
+                  "values": [
+                    {
+                      "userEnteredValue": {
+                        "stringValue": "Reference"
+                      }
+                    },
+                    {
+                      "userEnteredValue": {
+                        "stringValue": "Submission time"
+                      }
+                    },
+                    {
+                      "userEnteredValue": {
+                        "stringValue": "Salesperson"
+                      }
+                    },
+                    {
+                      "userEnteredValue": {
+                        "stringValue": "Customer"
+                      }
+                    },
+                    {
+                      "userEnteredValue": {
+                        "stringValue": "Project"
+                      }
+                    },
+                    {
+                      "userEnteredValue": {
+                        "stringValue": "Description"
+                      }
+                    },
+                    {
+                      "userEnteredValue": {
+                        "stringValue": "Amount"
+                      }
+                    },
+                    {
+                      "userEnteredValue": {
+                        "stringValue": "Proposed Richard %"
+                      }
+                    },
+                    {
+                      "userEnteredValue": {
+                        "stringValue": "Proposed Anastasia %"
+                      }
+                    },
+                    {
+                      "userEnteredValue": {
+                        "stringValue": "Proposed Jean-Claude %"
+                      }
+                    },
+                    {
+                      "userEnteredValue": {
+                        "stringValue": "Approved Richard %"
+                      }
+                    },
+                    {
+                      "userEnteredValue": {
+                        "stringValue": "Approved Anastasia %"
+                      }
+                    },
+                    {
+                      "userEnteredValue": {
+                        "stringValue": "Approved Jean-Claude %"
+                      }
+                    },
+                    {
+                      "userEnteredValue": {
+                        "stringValue": "Richard earned commission"
+                      }
+                    },
+                    {
+                      "userEnteredValue": {
+                        "stringValue": "Anastasia earned commission"
+                      }
+                    },
+                    {
+                      "userEnteredValue": {
+                        "stringValue": "Jean-Claude earned commission"
+                      }
+                    },
+                    {
+                      "userEnteredValue": {
+                        "stringValue": "Status"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "Expenses": {
+    "verified": true,
+    "onlyAuthorizedRowsRemoved": false,
+    "after": {
+      "spreadsheetId": "1Q8_NLiBBNTiDLmSAhnhs7ddAKkJU8xiHbRyN-CNdTMk",
+      "spreadsheetUrl": "https://docs.google.com/spreadsheets/d/1Q8_NLiBBNTiDLmSAhnhs7ddAKkJU8xiHbRyN-CNdTMk/edit",
+      "properties": {
+        "title": "Friends Included Finance",
+        "locale": "ru_RU",
+        "timeZone": "Europe/Riga"
+      },
+      "sheets": [
+        {
+          "properties": {
+            "sheetId": 836529603,
+            "title": "Expenses",
+            "index": 1,
+            "sheetType": "GRID",
+            "gridProperties": {
+              "rowCount": 1000,
+              "columnCount": 26
+            }
+          },
+          "data": [
+            {}
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -37,4 +37,17 @@ summary { cursor: pointer; padding: .75rem 0; font-weight: bold; }
 section.role-panel { margin: 1.5rem 0; }
 section[aria-label="Manager decisions"] > h3 { margin: 1.5rem 0 1rem; }
 button:disabled, fieldset:disabled button { opacity: .6; cursor: wait; }
+.financial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr)); gap: 1rem; align-items: start; }
+.financial-measures > div { grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; }
+.financial-measures dd, .commission-panel td { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.financial-measures > div:last-child { font-weight: bold; border-top: 1px solid #9aac9e; }
+.commission-panel { margin-top: 1rem; overflow-x: auto; }
+.commission-panel table { width: 100%; max-width: 36rem; border-collapse: collapse; background: white; }
+.commission-panel caption { text-align: left; font-weight: bold; padding: 1rem 0; }
+.commission-panel th, .commission-panel td { padding: .8rem; border-bottom: 1px solid #d5ddd6; }
+.commission-panel th { text-align: left; }
+.commission-panel tfoot { font-weight: bold; }
+.submission-info nav { display: flex; flex-wrap: wrap; gap: .8rem 1.5rem; }
+.submission-info a { color: #214f39; text-underline-offset: .2em; }
+.submission-info li { margin: .5rem 0; line-height: 1.5; }
 @media (max-width: 420px) { .transaction { padding: 1rem; } dl > div { grid-template-columns: 1fr; gap: .3rem; } }

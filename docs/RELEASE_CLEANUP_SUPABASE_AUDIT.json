@@ -1,0 +1,117 @@
+{
+  "capturedAt": "2026-09-29T18:55:20.299Z",
+  "records": [
+    {
+      "id": "187cd131-297e-45f5-ac22-a681d725605f",
+      "reference": "QA_BLOCK_G_SALE_001",
+      "transaction_type": "SALE",
+      "source": "WEBSITE",
+      "status": "APPROVED",
+      "revision": 2,
+      "submitter_employee_id": "3a274cc3-aff9-40c8-bdcb-204c06e4e07d",
+      "submitted_at": "2026-09-29T14:28:54.750863+00:00",
+      "customer": "Live Test Customer",
+      "project": "A",
+      "description": "Block G live test",
+      "amount_cents": 100000,
+      "proposed_richard_pct": 50,
+      "proposed_anastasia_pct": 30,
+      "proposed_jean_claude_pct": 20,
+      "final_richard_pct": 20,
+      "final_anastasia_pct": 40,
+      "final_jean_claude_pct": 40,
+      "commission_pool_cents": 10000,
+      "richard_commission_cents": 2000,
+      "anastasia_commission_cents": 4000,
+      "jean_claude_commission_cents": 4000,
+      "sheet_sync_status": "SYNCED",
+      "decision_notification_status": "SENT"
+    },
+    {
+      "id": "15fead09-22e8-4b51-ad6d-eded2f403ae0",
+      "reference": "QA_TELEGRAM_SALE_001",
+      "transaction_type": "SALE",
+      "source": "TELEGRAM",
+      "status": "PENDING_APPROVAL",
+      "revision": 1,
+      "submitter_employee_id": "3a274cc3-aff9-40c8-bdcb-204c06e4e07d",
+      "submitted_at": "2026-09-28T20:37:06.022233+00:00",
+      "customer": "Test Customer",
+      "project": "A",
+      "description": "Test sale from Telegram",
+      "amount_cents": 100000,
+      "proposed_richard_pct": 50,
+      "proposed_anastasia_pct": 30,
+      "proposed_jean_claude_pct": 20,
+      "final_richard_pct": null,
+      "final_anastasia_pct": null,
+      "final_jean_claude_pct": null,
+      "commission_pool_cents": 0,
+      "richard_commission_cents": 0,
+      "anastasia_commission_cents": 0,
+      "jean_claude_commission_cents": 0,
+      "sheet_sync_status": "SYNCED",
+      "decision_notification_status": "NOT_REQUIRED"
+    }
+  ],
+  "tableEvidence": {
+    "employees": {
+      "count": 5,
+      "sha256": "f5af34b119a3a44845e2f7baec4c7b241ce7ef583545819efc74a4818b7dcedd"
+    },
+    "telegram_links": {
+      "count": 1,
+      "sha256": "2494f3fe129b72bc4683aa2d487f35858c9b1d49c05f03177cf40f5cb42d55a3"
+    },
+    "telegram_sessions": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "telegram_updates": {
+      "count": 11,
+      "sha256": "24d204ea7078ce1ae894b712941a7d6ff74017ffecdde585a44a38e3310c2fee"
+    },
+    "transactions": {
+      "count": 2,
+      "sha256": "855fe130dc2eee13037cd1a887d4dadf95666da9a612ae82fef0bdf6805bb568"
+    }
+  },
+  "deletedAt": "2026-09-29T18:56:18.263Z",
+  "deletedRecords": [
+    {
+      "id": "187cd131-297e-45f5-ac22-a681d725605f",
+      "reference": "QA_BLOCK_G_SALE_001"
+    },
+    {
+      "id": "15fead09-22e8-4b51-ad6d-eded2f403ae0",
+      "reference": "QA_TELEGRAM_SALE_001"
+    }
+  ],
+  "after": {
+    "employees": {
+      "count": 5,
+      "unchangedExceptAuthorizedDeletion": true,
+      "sha256": "f5af34b119a3a44845e2f7baec4c7b241ce7ef583545819efc74a4818b7dcedd"
+    },
+    "telegram_links": {
+      "count": 1,
+      "unchangedExceptAuthorizedDeletion": true,
+      "sha256": "2494f3fe129b72bc4683aa2d487f35858c9b1d49c05f03177cf40f5cb42d55a3"
+    },
+    "telegram_sessions": {
+      "count": 0,
+      "unchangedExceptAuthorizedDeletion": true,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "telegram_updates": {
+      "count": 11,
+      "unchangedExceptAuthorizedDeletion": true,
+      "sha256": "24d204ea7078ce1ae894b712941a7d6ff74017ffecdde585a44a38e3310c2fee"
+    },
+    "transactions": {
+      "count": 0,
+      "unchangedExceptAuthorizedDeletion": true,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  }
+}

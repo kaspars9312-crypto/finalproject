@@ -1,9 +1,11 @@
 # Friends Included / Wedding Guests for Hire
 
-Blocks B–F are frozen; the Block G baseline is `590b3a4` (safe Sheets diagnostics).
-Block G adds website entry, manager correction/approval/allocation, Telegram link
-setup, and decision delivery/retry. These changes are uncommitted for review.
-No Block H financial dashboard is implemented.
+Blocks A–G are frozen at `0d28d6b` (Block G website manager decisions).
+Block H adds the manager financial dashboard and final submission shell, with
+automated official Test 1/Test 2 regression fixtures confined to test code.
+Block H is deployed and live-validated. The final release audit and live evidence
+are recorded in `docs/RELEASE_FINAL_AUDIT.md` and
+`docs/RELEASE_VALIDATION_STATUS.md`.
 
 ## Requirements and contracts
 
@@ -17,6 +19,7 @@ by Blocks C–E. Original documents and earlier migrations remain unchanged.
 - [Telegram contract](docs/BLOCK_E_TELEGRAM_CONTRACT.md)
 - [Block F implementation and review report](docs/BLOCK_F_SHEETS_CONTRACT.md)
 - [Block G implementation, acceptance review and runtime limits](docs/BLOCK_G_WEBSITE_CONTRACT.md)
+- [Block H dashboard and readiness review](docs/BLOCK_H_DASHBOARD_CONTRACT.md)
 
 ## Local development
 
@@ -63,8 +66,9 @@ protected by the `server-only` import boundary.
 
 ## Historical Block F setup
 
-The supplied Block G baseline reports this milestone live-verified. Retain the
-existing practice sale `QA_TELEGRAM_SALE_001`; Block G does not clean it up.
+The following is the original Block F setup guidance. The two named practice
+references were later removed through the separately authorized, audited release
+cleanup; do not recreate them.
 
 1. Create/select a spreadsheet with exactly **Sales** and **Expenses** tabs. Keep the
    tabs empty or use the exact headers in `src/server/sheets/rows.ts`.
@@ -114,18 +118,20 @@ pnpm typecheck
 pnpm lint
 pnpm build
 node scripts/check-client-secrets.mjs
+git diff --check
 ```
 
 Unit tests mock DB/RPC and external clients; no real network or credentials are used.
 The last check scans built browser assets for private env names and locally configured
 values without printing secrets. SQL QA is separate and must be run after review.
 
-## Block G review-time setup and delivery
+## Block G baseline and delivery
 
-After review, apply `supabase/migrations/20260929000000_website_decisions.sql` and
-run `supabase/tests/block_g_website_decisions.sql` in a dedicated connection. The
-SQL QA rolls back every application mutation and checks restoration afterward.
-Neither step has been run remotely by this implementation.
+The supplied Block H baseline reports the Block G migration applied, SQL QA passed
+with all five application tables restored after rollback, and deployment live.
+The website sale → Supabase → manager split/approval → same Sheets row → Telegram
+decision workflow was live-verified before this block. These checks were not rerun
+here. Expense behavior has automated/SQL coverage but was not manually live-tested.
 
 Every website financial mutation uses the frozen Block D operation, then attempts
 the existing Sheets sync after commit. Approval/allocation independently attempts
@@ -141,6 +147,42 @@ An interrupted claim remains PENDING and requires operator recovery after the ol
 sender has stopped; see the Block G report. External Telegram delivery cannot be
 guaranteed exactly once after an ambiguous network timeout.
 
-Still deferred: migration application, SQL QA execution, deployment and manual
-website/Sheets/Telegram checks; Block H dashboard; official Test 1/Test 2 records;
-test-data cleanup; full authentication; queues/workers; bidirectional Sheets editing.
+## Block H financial dashboard
+
+The dynamic server page uses `readDashboardRecords`, wrapping the existing
+`read_visible_transactions` RPC. The RPC resolves the active stored employee and
+returns own/all current records; only a stored MANAGER receives dashboard aggregates.
+No role string from the browser is trusted. The required demo selector still lets
+any visitor deliberately select Svetlana; it is not real-user authentication.
+
+The server maps exact SQL cent strings to checked safe integers and calls the frozen
+Block C `aggregateDashboard`. The existing read omits the commission pool, so the
+adapter sums stored individual commission cents, whose sum equals the pool by the
+database constraint. Block C validates these against the current amount/final split
+and its existing rounding rules. No new financial engine, migration, balance table,
+client aggregation, cache, or dependency is added.
+
+Project A/B result = approved income − approved commissions − finally allocated
+project expenses. Company result = all approved income − commissions − every saved
+expense. Pending sales contribute zero; overhead and awaiting expenses affect only
+the company until final attribution. Retries change delivery metadata, not finance.
+Record cards and dashboard use the same read snapshot. Refresh rereads Supabase;
+existing website actions revalidate the page after saves. Changes made elsewhere
+appear on refresh. Invalid/unsafe financial data shows an unavailable notice instead
+of misleading totals while keeping the existing record view available.
+
+The page shows Student **Kaspars Bickovs**, short usage instructions, and the supplied
+[Telegram bot](https://t.me/friends_included_final_bot),
+[Google Sheets](https://docs.google.com/spreadsheets/d/1Q8_NLiBBNTiDLmSAhnhs7ddAKkJU8xiHbRyN-CNdTMk/edit), and
+[GitHub repository](https://github.com/kaspars9312-crypto/finalproject) links.
+No new environment variables are required; production variable names are listed above.
+
+## Final release state
+
+The authorized cleanup, production deployment, Official Test 1, cumulative Official
+Test 2, end-to-end Expense workflow, integration retry checks, and signed-out
+instructor access verification are complete. The retained final production state is
+Project A €2,050.00, Project B €2,180.00, company result €3,930.00, and cumulative
+earned commissions of €140.00 / €175.00 / €215.00. S05 remains pending at €600.00
+and E07 remains awaiting allocation at €140.00. The release audit records the full
+evidence and all 40 acceptance criteria.
